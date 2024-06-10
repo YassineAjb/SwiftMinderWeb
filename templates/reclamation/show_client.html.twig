@@ -1,0 +1,55 @@
+{% extends '/front/base.html.twig' %}
+
+{% block title %}
+    Profil Utilisateur
+{% endblock %}
+
+{% block body %}
+    <section class="section section-profile parallax-container my-5">
+        <div class="parallax-content">
+            <div class="container">
+                <div class="row justify-content-center my-5">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="card-title">Détails de la Réclamation</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Idreclamation</th>
+                                            <td>{{ reclamation.idreclamation }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Titre</th>
+                                            <td>{{ reclamation.titre }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{{ reclamation.description }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>État</th>
+                                            <td>{% if reclamation.etat==false %}
+                                                    En traitement
+                                                {% else %}
+                                                    Traité
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('app_reclamation_me') }}" class="btn btn-secondary">Retour à la liste</a>
+                                <a href="{{ path('app_reclamation_edit', {'idreclamation': reclamation.idreclamation}) }}" class="btn btn-primary">Modifier</a>
+                                {{ include('reclamation/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

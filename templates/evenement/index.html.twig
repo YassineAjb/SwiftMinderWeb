@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .action-buttons a {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        /* Custom colors */
+        .icon-yellow {
+            color: yellow;
+        }
+
+        .icon-orange {
+            color: orange;
+        }
+
+        .icon-green {
+            color: green;
+        }
+
+        .icon-red {
+            color: red;
+        }
+
+        .no-records {
+            font-size: 18px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+    <li class="nav-item d-flex align-items-center">
+    
+        <div class="input-group search-area">
+            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher ...">
+            <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+        </div>
+        <br><br><br><br><br>
+    </li>
+    <script>
+        function filterTable() {
+            const filter = document.getElementById('searchInput').value.toUpperCase();
+            const products = document.querySelectorAll('.product-card');
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                const productName = product.querySelector('.product-name').innerText.toUpperCase();
+                const productDescription = product.querySelector('.product-description').innerText.toUpperCase();
+                if (productName.indexOf(filter) > -1 || productDescription.indexOf(filter) > -1) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            }
+        }
+        document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    </script>
+
+    {# Display error messages #}
+    {% for errorMessage in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+    {% endfor %}
+
+   {# <a href="{{ path('app_evenement_new') }}" class="btn btn-primary">Create New Election Event</a>
+    <br>
+    <br>
+    <a href="{{ path('app_evenement_pdf') }}">
+        <i class="fas fa-file-pdf icon-yellow"></i>
+        Generate List Events PDF
+    </a>
+    <a href="{{ path('all_vote_index') }}">
+        <i class="fas fa-vote-yea icon-orange"></i>
+        Votes
+    </a>
+    <a href="{{ path('app_rdv') }}">
+        <i class="far fa-calendar-alt icon-green"></i>
+        Calendar
+    </a>
+    <br>
+    <br>#}
+     <a href="{{ path('app_evenement_new') }}" class="btn btn-primary">Create New Election Event</a>
+    <br>  <br>   
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <a href="{{ path('app_evenement_pdf') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-file-pdf"></i> Generate List Events PDF
+        </a>
+        <a href="{{ path('all_vote_index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-vote-yea"></i> Votes
+        </a>
+        <a href="{{ path('app_rdv') }}" class="btn btn-outline-secondary">
+            <i class="far fa-calendar-alt"></i> Calendar
+        </a>
+    </div>
+</div>
+<br>  
+
+    <div class="products-container">
+        {% for evenement in evenements %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ asset('uploads/' ~ evenement.imgepath) }}" alt="Product Image">
+                </div>
+                <div class="product-details">
+                    <h2 class="product-name">{{ evenement.nome }}</h2>
+                    <p class="product-description">{{ evenement.postee }}</p>
+                    <p class="product-price">Mandate: {{ evenement.periodep }}</p>
+                    <p class="product-date">Date: {{ evenement.datee|date('Y-m-d') }}</p>
+                    <div class="action-buttons">
+                        <a href="{{ path('app_candidat_new', {'id_event': evenement.ide}) }}" class="icon-green">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                        <a href="{{ path('app_candidat_index', {'id_event': evenement.ide}) }}" class="icon-orange">
+                            <i class="fas fa-list"></i>
+                        </a>
+        <a href="{{ path('app_evenement_edit', {'ide': evenement.ide}) }}" class="icon-yellow">
+    <i class="bi bi-pencil"></i>
+</a>
+
+<form method="post" action="{{ path('app_evenement_delete', {'ide': evenement.ide}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.ide) }}">
+    <button type="submit" class="icon-red" style="border: none; background-color: transparent;">
+        <i class="fas fa-trash-alt" style="color: red; font-size: 20px;"></i>
+    </button>
+</form>
+
+
+</form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="no-records">No records found</div>
+        {% endfor %}
+    </div>
+
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+
+        // JavaScript code for chart generation...
+
+    </script>
+
+    <br>
+    <br>
+{% endblock %}

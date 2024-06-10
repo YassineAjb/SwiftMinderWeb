@@ -1,0 +1,57 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Ajouter Un Article {% endblock %}</title>
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Articles</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Ajouter</a></li>
+            </ol>
+        </div>
+        <!--***************************start**********************
+        *******************************************************-->
+        <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 20px; padding: 10px;">
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Ajouter Article</h4>
+                        <a href="{{ path('app_article_index') }}" class="btn btn-outline-success btn-rounded fs-16">+ Voir les Articles </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            {{ form_start(f, {'attr': {'novalidate': 'novalidate'}}) }} 
+                            <div class="row">
+                                <div class="mb-3 col-md-6">
+                                    {{ form_row(f.titre, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    {{ form_row(f.description, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="input-group mb-3">
+                                                        <span class="input-group-text">Upload</span>
+                                    <div class="form-file">
+                                        {{ form_row(f.image, {'attr': {'class': 'form-file-input form-control'}}) }}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-md-9">
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    {{ form_row(f.submit) }}
+                                </div>
+                            </div>
+                            {{ form_end(f) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--******************************************************
+        *******************************end*********************-->
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Welcome!{% endblock %}</title>	
+
+  	  {% block stylesheets %}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('assets_admin/images/favicon.png') }}">
+				<link href="{{ asset('assets_admin/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+				<link href="{{ asset('assets_admin/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
+				<link rel="stylesheet" href="{{ asset('assets_admin/vendor/nouislider/nouislider.min.css') }}">
+				<link href="{{ asset('assets_admin/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets_admin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
+      {% endblock %}
+      
+
+</head>
+<body>
+    
+    <div id="main-wrapper">
+      {% include '/admin/includes/header.html.twig' %}
+      <div class="content-body">
+            <!-- row -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xl-12">
+            {% block body %}
+            <!-- row -->
+		
+            {% endblock %}
+    </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    {% block javascripts %}
+      <script src="{{asset('assets_admin/vendor/global/global.min.js') }}"></script>
+      <script src="{{asset('assets_admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+      <script src="{{asset('assets_admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+      <script src="{{asset('assets_admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+      <!-- Apex Chart -->
+      <script src="{{asset('assets_admin/vendor/apexchart/apexchart.js') }}"></script>
+
+      <script src="{{asset('assets_admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+
+      <!-- Chart piety plugin files -->
+      <script src="{{asset('assets_admin/vendor/peity/jquery.peity.min.js') }}"></script>
+      <!-- Dashboard 1 -->
+      <script src="{{asset('assets_admin/js/dashboard/dashboard-1.js') }}"></script>
+      <script src="{{asset('assets_admin/js/plugins-init/datatables.init.js') }}"></script>
+
+      <script src="{{asset('assets_admin/vendor/owl-carousel/owl.carousel.js') }}"></script>
+      
+
+      <script src="{{asset('assets_admin/js/custom.min.js') }}"></script>
+      <script src="{{asset('assets_admin/js/dlabnav-init.js') }}"></script>
+      <script src="{{asset('assets_admin/js/demo.js') }}"></script>
+      <script src="{{asset('assets_admin/js/styleSwitcher.js') }}"></script>
+
+        <script>
+          function cardsCenter()
+          {
+            
+            /*  testimonial one function by = owl.carousel.js */
+            
+        
+            
+            jQuery('.card-slider').owlCarousel({
+              loop:true,
+              margin:0,
+              nav:true,
+              //center:true,
+              slideSpeed: 3000,
+              paginationSpeed: 3000,
+              dots: true,
+              navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+              responsive:{
+                0:{
+                  items:1
+                },
+                576:{
+                  items:1
+                },	
+                800:{
+                  items:1
+                },			
+                991:{
+                  items:1
+                },
+                1200:{
+                  items:1
+                },
+                1600:{
+                  items:1
+                }
+              }
+            })
+          }
+          
+          jQuery(window).on('load',function(){
+            setTimeout(function(){
+              cardsCenter();
+            }, 1000); 
+          });
+          
+        </script>
+	  {% endblock %}
+</body>
+
+
+</html>

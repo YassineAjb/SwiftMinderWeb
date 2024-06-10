@@ -1,0 +1,44 @@
+{% block title %}Paiement{% endblock %}
+<script src="https://js.stripe.com/v3/"></script>
+
+{% block body %}
+    <h1>Page de paiement</h1>
+    <div id="card-element">
+        <!-- Stripe Elements va injecter les éléments de carte ici -->
+    </div>
+    <!-- Utilisez le formulaire ci-dessous pour soumettre le paiement -->
+    <form id="payment-form">
+        <button type="submit">Payer</button>
+    </form>
+
+    <!-- JavaScript pour utiliser Stripe Elements -->
+    <script>
+        var stripe = Stripe('pk_test_51P9xooKS9crHgin9cuQMR9BkV3iHyzC4mPwQnE7Ugd09sOaOBtbyWtLqt512Iww4dmMgnFzuNaDK6VAYkJeMnisO00rrsjh8mr');
+        var elements = stripe.elements();
+
+        // Créez un élément de carte et ajoutez-le au formulaire
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        // Interceptez le formulaire et soumettez-le à l'aide de handleCardPayment
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.handleCardPayment("{{ client_secret }}", cardElement, {
+                payment_method_data: {
+                    billing_details: { name: 'Customer Name' }
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    // Affichez une erreur si le paiement a échoué
+                    alert('Une erreur s\'est produite lors du paiement : ' + result.error.message);
+                } else {
+                    // Redirigez l'utilisateur vers la page de confirmation de paiement réussi
+                    window.location.href = '{{ path('paiement_reussi') }}';
+                    
+                }
+            });
+        });
+    </script>
+{% endblock %}

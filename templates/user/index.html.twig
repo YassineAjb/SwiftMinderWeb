@@ -1,0 +1,142 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %} Liste des utilisateurs {% endblock %}
+
+{% block body %}
+<div class="content-body">
+    <div class="container-fluid">
+        <h1>Liste des utilisateurs</h1>
+<button id="btPrint" onclick="createPDF()" class="export-pdf-btn">
+    <img src="{{asset('assets_admin/icons/pdf.png') }}" alt="Custom PDF Icon" style="width: 50px; height: 50px;">
+    
+</button>
+
+        <!-- Formulaire de recherche -->
+       
+
+        {% if users is not empty %}
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>Iduser</th>
+                        <th onclick="sortTable(1)"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i>Email</th>
+                        
+                        <th>Role</th>
+                        <th>Numtel</th>
+                       <th>QR Code</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.iduser }}</td>
+                            <td>{{ user.email }}</td>
+                            
+                            <td>{{ user.role }}</td>
+                            <td>{{ user.numtel }}</td>
+                             <td>
+                            <img src="{{ user.qrCode }}" width="123" height="100" />
+                        </td>
+                            <td>
+                                {% if user.image %}
+                                    <img src="{{ asset('uploads/' ~ user.image) }}" alt="Classe image" width="100" />
+                                {% else %}
+                                    No image available
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('app_user_show', {'iduser': user.iduser}) }}">Voir</a>
+                                <a href="{{ path('app_user_edit', {'iduser': user.iduser}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun utilisateur trouvé.</p>
+        {% endif %}
+        
+        <!-- Lien pour créer un nouvel utilisateur -->
+        <a href="{{ path('app_user_new') }}" class="btn btn-success btn-lg">Créer un nouvel utilisateur</a>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+    function createPDF() {
+        var sTable = document.getElementById('table').outerHTML;
+        var style = "<style>";
+        style = style + "table {width: 100%; border-collapse: collapse; margin-top: 20px;}";
+        style = style + "th, td {border: 1px solid #ddd; padding: 8px; text-align: left;}";
+        style = style + "th {background-color: #f2f2f2;}";
+        style = style + "</style>";
+
+        // Remove last column (Actions)
+        var table = document.getElementById('table');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].deleteCell(-1); // Delete the last cell
+        }
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+        win.document.write('<html><head>');
+        win.document.write('<title>User list PDF</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+        win.print();    // PRINT THE CONTENTS.
+         setTimeout(function() {
+            location.reload(); // Reload the page to restore the original table structure
+        }, 1000);
+    }
+</script>
+
+    <script>
+    function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("table");
+            switching = true;
+            dir = "asc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                    }
+                }
+                }
+
+                if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+                } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+                }
+            }
+            }
+        </script>
+
+{% endblock %}

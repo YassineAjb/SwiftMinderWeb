@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Candidat</title>
+</head>
+<body>
+    <h1>Create new Candidat</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form_start(form) }}
+        <div>
+            {{ form_row(form.nomc, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom'}}) }}
+        </div>
+        <div>
+            {{ form_row(form.prenomc, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Prenom'}}) }}
+        </div>
+        <div>
+            {{ form_row(form.agec, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Age'}}) }}
+        </div>
+        <div>
+            {{ form_row(form.imgcpath, {'attr': {'class': 'form-control-file'}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-secondary" href="{{ path('app_candidat_index', {'id_event': id_event}) }}">Back</a>
+        {{ form_end(form) }}
+    </form>
+
+</body>
+</html>
+{% endblock %}

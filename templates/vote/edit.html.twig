@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Vote</title>
+
+{% block body %}
+    <h1>Edit Vote</h1>
+
+    {{ include('vote/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_vote_index') }}">back to list</a>
+
+    {{ include('vote/_delete_form.html.twig') }}
+{% endblock %}

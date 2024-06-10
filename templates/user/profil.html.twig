@@ -1,0 +1,43 @@
+{% extends '/front/base.html.twig' %}
+
+{% block title %}
+    Profil Utilisateur
+{% endblock %}
+
+{% block body %}
+    <section class="section section-profile parallax-container" data-parallax-img="images/bg-profile.jpg">
+        <div class="parallax-content">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card border-primary shadow-lg">
+                            <div class="card-body p-5">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 text-center mb-4">
+                                        <div class="profile-image"> 
+                                            {% if user.image %}
+                                                <img src="{{ asset('uploads/' ~ user.image) }}" alt="Profil image" class="img-fluid rounded-circle">
+                                            {% else %}
+                                                <div class="no-image-placeholder">No image available</div>
+                                            {% endif %} 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h2 class="card-title mb-2">Profil Utilisateur</h2>
+                                        <p class="mb-2"><strong>Email:</strong> {{ user.email }}</p>
+                                        <p class="mb-4"><strong>Numéro de téléphone:</strong> {{ user.getNumtel }}</p>
+                                        <div class="text-center">
+                                            <div class="mb-3">
+                                                <a href="{{ path('app_user_profil_edit') }}" class="btn btn-primary px-4" style="color:white;">Modifier le profil <i class="fas fa-edit ml-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

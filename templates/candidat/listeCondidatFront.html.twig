@@ -1,0 +1,127 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+<section class="section section-md bg-gray-100">
+  <div class="container">
+    <div class="row row-50">
+      <div class="col-sm-12">
+        <!-- Heading Component-->
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">{{ evenement.nome }} / Candidats</h5>
+          </div>
+        </article>
+        <li class="nav-item d-flex align-items-center">
+          <div class="input-group search-area">
+            <input type="text" class="form-control" id="searchInput" placeholder="Rechercher ..." onkeyup="filterTable()">
+<button class="btn" type="button" style="background-color: transparent; color:blue; border: none;" onclick="startSpeechRecognition()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+        <path d="M8 2a2 2 0 0 1 2 2v5a2 2 0 0 1-4 0V4a2 2 0 0 1 2-2zm4 6v2a4 4 0 0 1-8 0V8a4 4 0 0 1 8 0zm-4 6a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2z"/>
+    </svg>
+</button>
+
+
+            <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+          </div>
+        </li>
+        
+<script>
+        
+          function filterTable() {
+            const filter = document.getElementById('searchInput').value.toUpperCase();
+            const candidats = document.querySelectorAll('.product-list');
+            for (let i = 0; i < candidats.length; i++) {
+              const candidat = candidats[i];
+              const candidatName = candidat.querySelector('.product-list-title').innerText.toUpperCase();
+              const candidatAge = candidat.querySelector('p').innerText.toUpperCase();
+              if (candidatName.indexOf(filter) > -1 || candidatAge.indexOf(filter) > -1) {
+                candidat.style.display = '';
+              } else {
+                candidat.style.display = 'none';
+              }
+            }
+          }
+
+ function startSpeechRecognition() {
+        // Démarrer la reconnaissance vocale
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'fr-FR'; // Définir la langue de la reconnaissance vocale (facultatif)
+        recognition.start();
+
+        // Écouter les résultats de la reconnaissance vocale
+        recognition.onresult = function(event) {
+            const recognizedText = event.results[0][0].transcript.trim(); // Récupérer le texte reconnu
+            const cleanedText = recognizedText.endsWith('.') ? recognizedText.slice(0, -1) : recognizedText; // Supprimer le dernier caractère s'il s'agit d'un point
+            document.getElementById('searchInput').value = cleanedText; // Afficher le résultat dans le champ de recherche
+
+            // Appel de la fonction de recherche lorsque du texte est reconnu
+            filterTable(cleanedText); 
+        };
+
+        // Gérer les erreurs éventuelles de la reconnaissance vocale
+        recognition.onerror = function(event) {
+            console.error('Erreur de reconnaissance vocale:', event.error);
+        };
+    }
+</script>
+
+
+        {% if candidats is not empty %}
+        {% for candidat in candidats %}
+        <!-- Product - List build-->
+        <article class="product-list">
+          <div class="product-list-aside"><img src="{{ asset('uploads/' ~ candidat.imgcpath) }}" alt="">
+            <!-- Badge-->
+          </div>
+          <section class="product-list-main">
+            <h4 class="product-list-title">{{ candidat.nomc }} {{ candidat.prenomc }}</h4>
+            <p>{{ candidat.agec }} Ans</p>
+            <!-- Utilisez candidat.agec pour l'âge -->
+            <!-- Utilisez candidat.nomc et candidat.prenomc pour le nom et prénom -->
+            <!-- Utilisez candidat.imgcpath pour l'URL de l'image -->
+            <ul class="product-list-buttons">
+              <li>
+<form method="post" action="{{ path('app_vote_new_from_front',{'idc': candidat.idc, 'id_event': evenement.ide}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.ide) }}">
+    <button type="submit" class="button button-primary" style="border: none;">
+       Voter
+    </button>
+</form>
+<script>
+    function confirmVote(event) {
+        const confirmation = confirm('Voulez-vous voter pour cette personne ?');
+        if (!confirmation) {
+            event.preventDefault(); // Empêche le lien de se suivre si l'utilisateur clique sur "Annuler"
+        }
+        return confirmation; // Retourne true si l'utilisateur clique sur "OK", sinon false
+    }
+</script>
+
+              </li>
+            </ul>
+          </section>
+        </article>
+        {% endfor %}
+        {% else %}
+        <div class="col-sm-12">
+          <br><br><br>
+          <p>Aucun candidat disponible.</p>
+        </div>
+        <div class="pagination" style="margin-left:450px;">
+            {% do candidats.setPageRange(3) %}
+            {{ knp_pagination_render(candidats, 'pagination.html.twig') }}
+            <br><br><br><br><br>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        {% endif %}
+        <br></br>
+        <div class="pagination" style="margin-left:1px;">
+            {% do candidats.setPageRange(3) %}
+            {{ knp_pagination_render(candidats, 'pagination.html.twig') }}
+            <br><br><br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

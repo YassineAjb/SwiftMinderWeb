@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>Candidat</title>
+
+{% block body %}
+    <h1>Candidat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idc</th>
+                <td>{{ candidat.idc }}</td>
+            </tr>
+            <tr>
+                <th>Nomc</th>
+                <td>{{ candidat.nomc }}</td>
+            </tr>
+            <tr>
+                <th>Prenomc</th>
+                <td>{{ candidat.prenomc }}</td>
+            </tr>
+            <tr>
+                <th>Agec</th>
+                <td>{{ candidat.agec }}</td>
+            </tr>
+            <tr>
+                <th>Imgcpath</th>
+                <td>{{ candidat.imgcpath }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_candidat_index') }}">back to list</a>
+
+    <a href="{{ path('app_candidat_edit', {'idc': candidat.idc}) }}">edit</a>
+
+    {{ include('candidat/_delete_form.html.twig') }}
+{% endblock %}

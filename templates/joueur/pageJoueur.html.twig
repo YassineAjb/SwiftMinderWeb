@@ -1,0 +1,271 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+      <!-- Section Breadcrumbs-->
+      <section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+        <div class="parallax-content breadcrumbs-custom context-dark">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Player Page</h3>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="">Team</a></li>
+              <li class="active">Player Page</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+       <!-- Privacy Policy-->
+      <section class="section section-md bg-gray-100">
+        <div class="container">
+          <div class="row row-30">
+            <div class="col-lg-8">
+              <!-- Heading Component-->
+              <article class="heading-component">
+                <div class="heading-component-inner">
+                  <h5 class="heading-component-title">Player overview
+                  </h5>
+                </div>
+              </article>
+              <!-- Player Info Corporate-->
+              <div class="player-info-corporate">
+                <div class="player-info-figure">
+                  <div class="block-number"><span>{{Joueur.getShirtnum()}}</span></div>
+                  <div class="player-img"><img src="http://localhost/Images/Joueurs/{{ Joueur.getImagepath() }}" alt="" width="368" height="286">
+                  </div>
+                  <div class="team-logo-img"><img src="images/logo-team-1-237x312.png" alt="" width="237" height="312">
+                  </div>
+                </div>
+                
+                <div class="player-info-main">
+                  <h4 class="player-info-title">{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}}</h4>
+                  <p class="player-info-subtitle">{{Joueur.getPosition()}}</p>
+                  <hr>
+                  <div class="player-info-table">
+                    <div class="table-custom-wrap">
+                      <table class="table-custom">
+                        <tr>
+                          <th>Age</th>
+                          <th>{{Joueur.getAge()}}</th>
+                          <th>Height</th>
+                          <th>{{Joueur.getHauteur() ~ " cm"}}</th>
+                        </tr>
+                        <tr>
+                          <td>Weight</td>
+                          <td>{{Joueur.getPoids() ~ " Kg"}}</td>
+                          <td>Pied fort</td>
+                          <td>{{Joueur.getPiedfort()}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="player-info-progress">
+                    <!-- Linear progress bar-->
+                    <article class="progress-linear progress-bar-modern">
+                      <div class="progress-header">
+                        <p>Pass Acc</p>
+                      </div>
+                      <div class="progress-bar-linear-wrap">
+                        <div class="progress-bar-linear"></div>
+                      </div><span class="progress-value">{{ random(40, 90) }}</span>
+                    </article>
+                    <!-- Linear progress bar-->
+                    <article class="progress-linear progress-bar-modern">
+                      <div class="progress-header">
+                        <p>Shots Acc</p>
+                      </div>
+                      <div class="progress-bar-linear-wrap">
+                        <div class="progress-bar-linear"></div>
+                      </div><span class="progress-value">{{ random(60, 100) }}</span>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <!--  Block Player Info-->
+              <div class="block-player-info">
+                <h4>Biography</h4>
+                <!-- Quote Modern-->
+                <article class="quote-modern">
+                  <div class="quote-modern-text">
+                    <p>{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}} is the best player in our team. Technically perfect, he brings together unselfishness, pace, composure and goals, which make him number one.</p>
+                  </div>
+                  <div><img src="{{ Joueur.QRcode }}" alt="" width="368" height="286"></div>
+                </article>
+                <div class="block-player-info-content">
+                  <p>{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}}'s footballing career started in {{ random(1990, 2005) }} at Newell's Old Boys, where he played until the year 2006. At the age of {{ random(12, 13) }}, Jack crossed the Atlantic to try his luck in Barcelona, and joined the Under 14s. He made spectacular progress at each of the different age levels, climbing through the ranks to Atletico C, followed by Atletico B and the first team in record time.</p>
+                  <p>As of 2024 {{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}} is worth an estimated ${{ random(30, 80) }} million, taking into account his salary plus bonuses and endorsements, according to Forbes.com. That makes him the second highest-paid soccer player and the third highest-paid athlete in the world.</p>
+                  <p>At the Under 20 World Cup in Holland, {{Joueur.getNom()}} not only won the title with USA, but was also the leading goalscorer and was voted best player in the tournament.</p>
+                </div>
+                <div class="block-player-info-timeline">
+                  <div class="player-info-timeline-item">
+                    <div class="player-info-timeline-item-header"><span class="timeline-counter">2005</span>
+                      <h5>Career Start</h5>
+                    </div>
+                    <div class="player-info-timeline-item-text">
+                      <p>His breakthrough came in the {{ random(2005, 2008) }} season, starting with an amazing performance in the Joan Gamper Trophy match against Juventus. He was also outstanding at the Santiago Bernabéu, in Barcelona's unforgettable 3-0 win, and also at Stamford Bridge, in the Champions League match.</p>
+                    </div>
+                  </div>
+                  <div class="player-info-timeline-item">
+                    <div class="player-info-timeline-item-header"><span class="timeline-counter">2009</span>
+                      <h5>Getting more successful</h5>
+                    </div>
+                    <div class="player-info-timeline-item-text">
+                      <p>In the 2008/09 season, {{Joueur.getNom()}} became the main star of the Barça show. He managed to stay injury free all season, and played {{ random(30, 55) }} games, scoring {{ random(20, 60) }} goals. The American was also fundamental in the Copa del Rey and Champions League finals, scoring Atletico 's second goals in both.</p>
+                    </div>
+                  </div>
+                  <div class="player-info-timeline-item">
+                    <div class="player-info-timeline-item-header"><span class="timeline-counter">2012</span>
+                      <h5>{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}} becomes the top goalscorer</h5>
+                    </div>
+                    <div class="player-info-timeline-item-text">
+                      <p>The season 2011/12 is when Messi moved past César Rodríguez's record of {{ random(150, 300) }} official goals to become the Club's all time top goalscorer. He achieved this on the 20 March 2012 in a 5-3 victory over Granada in which he scored a brilliant hat-trick.</p>
+                    </div>
+                  </div>
+                  <div class="player-info-timeline-item">
+                    <div class="player-info-timeline-item-header"><span class="timeline-counter">2015</span>
+                      <h5>New matches and the first major injury</h5>
+                    </div>
+                    <div class="player-info-timeline-item-text">
+                      <p>{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}} scored in {{ random(20, 50) }} consecutive league matches - half a season - until an injury at away at PSG meant he was not at his best in the decisive phase of that campaign’s Champions League. On the domestic front, Messi was also key in Atletico claiming the league title with 100 points.</p>
+                    </div>
+                  </div>
+                  <div class="player-info-timeline-item">
+                    <div class="player-info-timeline-item-header"><span class="timeline-counter">2024</span>
+                      <h5>Copa del rey</h5>
+                    </div>
+                    <div class="player-info-timeline-item-text">
+                      <p>{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}} made his 250th league appearance in that season and in a game in the Copa del Rey against Levante, he played in his 400th match in a Atletico shirt, having recorded a staggering 331 goals at that point in his career for the blaugranes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row row-30">
+                <div class="col-md-6 col-lg-12">
+                  <!-- Heading Component-->
+                  <article class="heading-component">
+                    <div class="heading-component-inner">
+                      <h5 class="heading-component-title">Statistics
+                      </h5>
+                      <div class="heading-component-aside">
+                        <select class="select" data-placeholder="All Competitions" data-container-class="select-minimal-xl">
+                          <option label="placeholder"></option>
+                          <option value="all" selected="">All Competitions</option>
+                          <option value="world">World Champions</option>
+                        </select>
+                      </div>
+                    </div>
+                  </article>
+                  <!-- List Statistics-->
+                  <ul class="list-statictics">
+                    <li><a href="#">Goals scored</a><span class="list-statictics-counter">{{ random(1, 20) }}</span></li>
+                    <li><a href="#">Shots</a><span class="list-statictics-counter">{{ random(30, 50) }}</span></li>
+                    <li><a href="#">Shots on target</a><span class="list-statictics-counter">{{ random(20, 30) }}</span></li>
+                    <li><a href="#">Assists</a><span class="list-statictics-counter">{{ random(1, 30) }}</span></li>
+                    <li><a href="#">Key Passes</a><span class="list-statictics-counter">{{ random(30, 50) }}</span></li>
+                    <li><a href="#">Dribbles</a><span class="list-statictics-counter">{{ random(1, 50) }}</span></li>
+                    <li><a href="#">Fouls</a><span class="list-statictics-counter">{{ random(1, 20) }}</span></li>
+                    <li><a href="#">Minutes played</a><span class="list-statictics-counter">{{ random(2000, 3000) }}</span></li>
+                    <li><a href="#">Yellow Cards</a><span class="list-statictics-counter">{{ random(1, 10) }}</span></li>
+                    <li><a href="#">Red Cards</a><span class="list-statictics-counter">{{ random(0, 4) }}</span></li>
+                  </ul>
+                </div>
+                <div class="col-md-6 col-lg-12">
+                  <!-- Heading Component-->
+                  <article class="heading-component">
+                    <div class="heading-component-inner">
+                      <h5 class="heading-component-title">Player Awards
+                      </h5>
+                    </div>
+                  </article>
+                  <!-- Owl Carousel-->
+                  <div class="owl-carousel owl-carousel-dots-modern awards-carousel" data-items="1" data-autoplay="true" data-autoplay-speed="4000" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="true" data-margin="0" data-mouse-drag="true">
+                                      <!-- Awards Item-->
+                                      <div class="awards-item"> 
+                                        <div class="awards-item-main">
+                                          <h4 class="awards-item-title"><span class="text-accent">World</span>Champions
+                                          </h4>
+                                          <div class="divider"></div>
+                                          <h5 class="awards-item-time">December {{ random(2000, 2024) }}</h5>
+                                        </div>
+                                        <div class="awards-item-aside"> <img src="images/thumbnail-minimal-1-67x147.png" alt="" width="67" height="147">
+                                        </div>
+                                      </div>
+                                      <!-- Awards Item-->
+                                      <div class="awards-item"> 
+                                        <div class="awards-item-main">
+                                          <h4 class="awards-item-title"><span class="text-accent">Best</span>Forward
+                                          </h4>
+                                          <div class="divider"></div>
+                                          <h5 class="awards-item-time">June {{ random(2000, 2024) }}</h5>
+                                        </div>
+                                        <div class="awards-item-aside"> <img src="images/thumbnail-minimal-2-68x126.png" alt="" width="68" height="126">
+                                        </div>
+                                      </div>
+                                      <!-- Awards Item-->
+                                      <div class="awards-item"> 
+                                        <div class="awards-item-main">
+                                          <h4 class="awards-item-title"><span class="text-accent">Best</span>Coach
+                                          </h4>
+                                          <div class="divider"></div>
+                                          <h5 class="awards-item-time">November {{ random(2000, 2024) }}</h5>
+                                        </div>
+                                        <div class="awards-item-aside"> <img src="images/thumbnail-minimal-3-73x135.png" alt="" width="73" height="135">
+                                        </div>
+                                      </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-12">
+                  <!-- Heading Component-->
+                  <article class="heading-component">
+                    <div class="heading-component-inner">
+                      <h5 class="heading-component-title">Player News Log
+                      </h5>
+                    </div>
+                  </article>
+                                    <!-- Comment Modern-->
+                                    <div class="comment-modern">
+                                      <svg version="1.1" x="0px" y="0px" width="6.888px" height="4.68px" viewbox="0 0 6.888 4.68" enable-background="new 0 0 6.888 4.68" xml:space="preserve">
+                                        <path fill="#171617" d="M1.584,0h1.8L2.112,4.68H0L1.584,0z M5.112,0h1.776L5.64,4.68H3.528L5.112,0z"></path>
+                                      </svg>
+                                      <p class="comment-modern-title"><a href="blog-post.html"><span class="text-primary">Williams-Goss</span> Signed a two-year contract with the Serbian club KK Partizan</a></p>
+                                      <time class="comment-modern-time" datetime="2024"><span class="icon mdi mdi-clock icon-primary"></span>April 15, 2024
+                                      </time>
+                                    </div>
+                                    <!-- Comment Modern-->
+                                    <div class="comment-modern">
+                                      <svg version="1.1" x="0px" y="0px" width="6.888px" height="4.68px" viewbox="0 0 6.888 4.68" enable-background="new 0 0 6.888 4.68" xml:space="preserve">
+                                        <path fill="#171617" d="M1.584,0h1.8L2.112,4.68H0L1.584,0z M5.112,0h1.776L5.64,4.68H3.528L5.112,0z"></path>
+                                      </svg>
+                                      <p class="comment-modern-title"><a href="blog-post.html"><span class="text-primary">Hill </span> Underwent surgery Sunday to repair a torn hamstring and is expected to be sidelined</a></p>
+                                      <time class="comment-modern-time" datetime="2024"><span class="icon mdi mdi-clock icon-primary"></span>April 15, 2024
+                                      </time>
+                                    </div>
+                                    <!-- Comment Modern-->
+                                    <div class="comment-modern">
+                                      <svg version="1.1" x="0px" y="0px" width="6.888px" height="4.68px" viewbox="0 0 6.888 4.68" enable-background="new 0 0 6.888 4.68" xml:space="preserve">
+                                        <path fill="#171617" d="M1.584,0h1.8L2.112,4.68H0L1.584,0z M5.112,0h1.776L5.64,4.68H3.528L5.112,0z"></path>
+                                      </svg>
+                                      <p class="comment-modern-title"><a href="blog-post.html"><span class="text-primary">Fultz</span> Says he will be ready for fall camp after his recovery period is finished</a></p>
+                                      <time class="comment-modern-time" datetime="2024"><span class="icon mdi mdi-clock icon-primary"></span>April 15, 2024
+                                      </time>
+                                    </div>
+                                    <!-- Comment Modern-->
+                                    <div class="comment-modern">
+                                      <svg version="1.1" x="0px" y="0px" width="6.888px" height="4.68px" viewbox="0 0 6.888 4.68" enable-background="new 0 0 6.888 4.68" xml:space="preserve">
+                                        <path fill="#171617" d="M1.584,0h1.8L2.112,4.68H0L1.584,0z M5.112,0h1.776L5.64,4.68H3.528L5.112,0z"></path>
+                                      </svg>
+                                      <p class="comment-modern-title"><a href="blog-post.html"><span class="text-primary">Knight </span> Underwent surgery to repair a torn ACL in his left knee and has been declared out</a></p>
+                                      <time class="comment-modern-time" datetime="2024"><span class="icon mdi mdi-clock icon-primary"></span>April 15, 2024
+                                      </time>
+                                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

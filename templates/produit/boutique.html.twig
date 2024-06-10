@@ -1,0 +1,168 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %} Hello Controller! {% endblock %}</title>
+    <!-- Section Breadcrumbs-->
+    <section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+        <div class="parallax-content breadcrumbs-custom context-dark">
+            <div class="container">
+                <h3 class="breadcrumbs-custom-title">Grid Shop</h3>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li class="active">Grid Shop</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- Grid Shop-->
+    <section class="section section-md bg-gray-100">
+        <div class="container">
+            <div class="row row-50">
+                <div class="col-xl-9">
+                    <!-- Heading Component-->
+                    <article class="heading-component">
+                        <div class="heading-component-inner">
+                            <h5 class="heading-component-title">Catalogue Produit</h5>
+                            <div class="heading-component-aside">
+                                <ul class="list-inline list-inline-xs list-inline-middle">
+                                    <li>
+                                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-md">
+                                            <option label="placeholder"></option>
+                                            <option value="newest first" selected="">newest first</option>
+                                            <option value="oldest first">oldest first</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-md">
+                                            <option label="placeholder"></option>
+                                            <option value="product price" selected="">product price</option>
+                                            <option value="low to high">low to high</option>
+                                            <option value="high to low">high to low</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-lg">
+                                            <option label="placeholder"></option>
+                                            <option value="show 6 per page" selected="">show 6 per page</option>
+                                            <option value="show 12 per page">show 12 per page</option>
+                                            <option value="show 24 per page">show 24 per page</option>
+                                        </select>
+                                    </li>
+                                    <li><a class="icon icon-xs-big icon-gray-500 fa-th active" href="grid-shop.html"></a></li>
+                                    <li><a class="icon icon-xs-big icon-gray-500 fa-list-ul" href="boutiquelist"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                    <div class="row row-30" id="product-list">
+                        {% for produit in produits %}
+                        {% if produit.getQauntiteProduit() > 0 %}
+                            <div class="col-md-6 col-lg-4 product-item" data-category="{{ produit.getCategory.id }}">
+                                <article class="product product-sm">
+                                    <header class="product-header">
+                                        <!-- Badge-->
+                                        <div ><span ></span></div>
+                                        <div class="product-figure"><img src="http://localhost/Images/Produits/{{ produit.getImage() }}" alt=""></div>
+                                        <div class="product-buttons">
+                                            <div class="product-button product-button-share fl-bigmug-line-share27" style="font-size: 22px">
+                                                <ul class="product-share">
+                                                    <li class="product-share-item"><span>Share</span></li>
+                                                    <li class="product-share-item"><a class="icon fa fa-facebook" href="#"></a></li>
+                                                    <li class="product-share-item"><a class="icon fa fa-instagram" href="#"></a></li>
+                                                    <li class="product-share-item"><a class="icon fa fa-twitter" href="#"></a></li>
+                                                    <li class="product-share-item"><a class="icon fa fa-google-plus" href="#"></a></li>
+                                                </ul>
+                                            </div><a href="{{ path('ajoutcommande',{'id':produit.idproduit}) }}" class="product-button fl-bigmug-line-shopping202" href="shopping-cart.html" style="font-size: 26px"></a><a class="product-button fl-bigmug-line-zoom60" href="images/shop/product-1-original.jpg" data-lightgallery="item" style="font-size: 25px"></a>
+                                        </div>
+                                    </header>
+                                    <footer class="product-content">
+                                        <h6 class="product-title"><a href="/boutique/{{produit.idProduit}}">{{produit.nomProduit }}</a></h6>
+                                        <div class="product-price"><span class="heading-6 product-price-new">${{produit.prixProduit}}</span></div>
+                                    </footer>
+                                </article>
+                            </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="row row-50">
+                        <div class="col-md-6 col-xl-12">
+                            <!-- Categories-->
+                            <!-- Heading Component-->
+                            <article class="heading-component">
+                                <div class="heading-component-inner">
+                                    <h5 class="heading-component-title">Categories</h5>
+                                </div>
+                            </article>
+                            <div class="card-shop">
+                                <ul class="list-md form-wrap" id="category-list">
+                                    {% for categorie in categories %}
+                                        {% set nombre_produits = 0 %}
+                                        {% for produit in categorie.produits %}
+                                            {% set nombre_produits = nombre_produits + 1 %}
+                                        {% endfor %}
+                                        <li>
+                                            <label class="checkbox-inline checkbox-inline-lg">
+                                                <input name="input-checkbox-1" value="{{ categorie.id }}" type="checkbox" class="category-checkbox">{{ categorie.titre }}
+                                            </label>
+                                            <span class="checkbox-inline-count">{{ nombre_produits }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-12">
+                            <!-- Price-->
+                            <!-- Heading Component-->
+                            <article class="heading-component">
+                                <div class="heading-component-inner">
+                                    <h5 class="heading-component-title">Price</h5>
+                                </div>
+                            </article>
+                            <div class="card-shop">
+                                <!-- RD Range-->
+                                <div class="rd-range-wrap">
+                                    <div class="rd-range-form-wrap">
+                                        <input class="rd-range-input rd-range-input-value-1" id="test" type="text" name="value-1"><span>$</span>
+                                    </div>
+                                    <div class="rd-range-divider"></div>
+                                    <div class="rd-range-form-wrap">
+                                        <input class="rd-range-input rd-range-input-value-2" type="text" name="value-2"><span>$</span>
+                                    </div>
+                                </div>
+                                <div class="rd-range" data-min="0" data-max="300" data-start="[50, 250]" data-step="1" data-tooltip="false" data-min-diff="50" data-input=".rd-range-input-value-1" data-input-2=".rd-range-input-value-2"></div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+       document.querySelectorAll('.category-checkbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        var checkedCategories = document.querySelectorAll('.category-checkbox:checked');
+        var selectedCategories = Array.from(checkedCategories).map(function(checkbox) {
+            return checkbox.value;
+        });
+
+        var productItems = document.querySelectorAll('.product-item');
+
+        productItems.forEach(function(item) {
+            var itemCategory = item.getAttribute('data-category');
+            if (selectedCategories.includes(itemCategory) || selectedCategories.length === 0) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+    </script>
+{% endblock %}

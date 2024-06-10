@@ -1,0 +1,57 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+    <div class="content-body">
+        <div class="container-fluid">
+
+            <!--***************************start**********************
+      *******************************************************-->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Liste Produit</h4>
+                            <div class="mb-4">
+                                <a href="/ajoutcategorie" class="btn btn-outline-success btn-rounded fs-16">+ Nouveau Categorie</a>
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example3" class="display" style="min-width: 845px">
+                                    <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Description</th> 
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for category in b %}
+                                    <tr>
+                                        <td>{{ category.titre }}</td>
+                                        <td>{{ category.Description }}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="{{ path('modifiercategorie',{'id':category.id}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="{{ path('supprimercategorie',{'id':category.id}) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        <td>
+                                            <div class="d-flex">
+                                                
+                                            </div>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--******************************************************
+        *******************************end*********************-->
+    </div>
+    </div>
+{% endblock %}

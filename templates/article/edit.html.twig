@@ -1,0 +1,41 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Edit Article {% endblock %}</title>
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Article</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }} 
+                                    <div class="mb-3">
+                                        {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ form_row(form.image, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-md-9">
+                                            <a href="{{ path('app_article_index') }}" class="btn btn-secondary">Back to List</a>
+                                        </div>
+                                        <div class="mb-3 col-md-3">
+                                            {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                        </div>
+                                    </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

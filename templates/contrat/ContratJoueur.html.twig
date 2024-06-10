@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  	  {% block stylesheets %}
+       
+        <link href="{{ asset('assets_pdf/contrat.css') }}" rel="stylesheet">
+
+      {% endblock %}
+      
+
+</head>
+<body>
+{% block body %}
+<main>
+  <article id="editable">
+    <header>
+       <img src="{{ imageData }}"  /> 
+      <h1 class="headline">Contrat professionnel</h1>
+      <div class="meta"> Ce contrat est établi entre :
+<p>
+[Nom du club], société anonyme au capital de [montant du capital] euros, dont le siège social est situé à [adresse du siège social], immatriculée au registre du commerce et des sociétés de [ville] sous le numéro [numéro d'immatriculation], représentée par [nom du représentant], en sa qualité de [titre du représentant], dûment habilité(e) à cet effet,
+</p>
+<p>
+Ci-après dénommée "le Club",
+</p>
+<p>
+Et
+</p>
+<p>
+{{contrat.getJoueur().getNom}} {{contrat.getJoueur().getPrenom}}, agé de {{contrat.getJoueur().getAge}} de profession {{contrat.getJoueur().getPosition}}.
+</p>
+<p>
+Ci-après dénommé(e) "le Joueur",
+</p>
+      </div>
+    </header>
+    <section>
+      <h2>I. Objet du Contrat</h2>
+      <p> Le présent contrat a pour objet de définir les conditions dans lesquelles le Joueur s'engage à évoluer au sein du Club en qualité de joueur professionnel de football, pendant la période définie ci-après.</p>
+    </section>
+    <section>
+      <h2>II. Durée du Contrat</h2>
+      <p>Le présent contrat est établi pour une durée déterminée de quelques années, prenant effet à compter du {{contrat.getDateDebut()| date }} et expirant le {{contrat.getDateFin()| date }}.</p>
+    </section>
+    <section>
+      <h2>III. Rémunération</h2>
+      <p>Le Joueur percevra une rémunération mensuelle brute de **{{contrat.getSalaire()}}** euros, payable par virement bancaire sur le compte du Joueur chaque mois.</p>
+  
+
+    </section>
+    <section>
+      <h2>IV. Obligations du Joueur</h2>
+      <p>Le Joueur s'engage à :</p>
+      <p>Respecter les règles et les principes du football, ainsi que les règlements de la Fédération Française de Football et du Club.</p>
+      <p>Participer activement à tous les entraînements et matchs organisés par le Club.</p>
+      <p>Se conformer aux directives et consignes données par l'entraîneur et le staff du Club.</p>
+      <p>Maintenir une condition physique optimale et une hygiène de vie irréprochable.</p>
+      <p>Avoir un comportement exemplaire sur et en dehors du terrain, tant vis-à-vis de ses coéquipiers, du staff, des dirigeants du Club, que du public.</p>
+      <p>Respecter les obligations de présence et de ponctualité définies par le Club.</p>
+      <p>Ne pas exercer d'autre activité professionnelle ou sportive sans l'autorisation préalable du Club.</p>
+      <p>Participer aux opérations de promotion et de communication organisées par le Club.</p>
+    </section>
+    <section>
+      <h2>V. Obligations du Club</h2>
+      <p>Le Club s'engage à :
+
+      <p>Verser au Joueur la rémunération et les primes prévues par le présent contrat.</p>
+      <p>Mettre à la disposition du Joueur les infrastructures et les équipements nécessaires à son entraînement et à sa pratique du football.</p>
+      <p>Assurer la couverture médicale du Joueur en cas de blessure ou de maladie.</p>
+      <p>Protéger les intérêts du Joueur dans le cadre de sa carrière footballistique.</p>
+    </section>
+    <section>
+      <h2>VI. Rupture du Contrat</h2>
+      <p>Le présent contrat peut être résilié par l'une ou l'autre des parties, moyennant le respect d'un préavis de 2 mois, à l'exception des cas suivants :
+
+      <p>Faute grave du Joueur, telle que l'insubordination, le refus de s'entraîner ou de jouer, l'atteinte à l'image du Club, etc.
+        <p />
+      <p>Incapacité physique permanente du Joueur l'empêchant d'exercer son activité.</p>
+      <p>Violation par l'une des parties des obligations essentielles du présent contrat.</p>
+    </section>
+    <section>
+      <h2>VII. Dispositions Générales</h2>
+      <p>Le présent contrat constitue l'intégralité de l'accord entre les parties et se substitue à toute convention antérieure écrite ou orale relative à l'objet du contrat.</p>
+
+      <p>Aucune modification du présent contrat ne pourra être valable qu'à condition d'être faite par écrit et signée par les deux parties.</p>
+    </section>
+  </article>
+</main>
+{% endblock %}
+</body>
+
+</html>

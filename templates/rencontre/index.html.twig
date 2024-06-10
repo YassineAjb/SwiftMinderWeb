@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<title>Rencontre index</title>
+
+{% block body %}
+    <h1>Rencontre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idrencontre</th>
+                <th>Daterencontre</th>
+                <th>Adversaire</th>
+                <th>Score</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rencontre in rencontres %}
+            <tr>
+                <td>{{ rencontre.idrencontre }}</td>
+                <td>{{ rencontre.daterencontre ? rencontre.daterencontre|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ rencontre.adversaire }}</td>
+                <td>{{ rencontre.score }}</td>
+                <td>
+                    <a href="{{ path('app_rencontre_show', {'idrencontre': rencontre.idrencontre}) }}">show</a>
+                    <a href="{{ path('app_rencontre_edit', {'idrencontre': rencontre.idrencontre}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rencontre_new') }}">Create new</a>
+{% endblock %}

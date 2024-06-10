@@ -1,0 +1,83 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+
+
+    {{ form_row(form.email, {'attr': {'class': 'form-control', 'oninput': 'validateEmail()'}}) }}
+    <div id="email-error-message" style="display: none; color: red;">Veuillez saisir une adresse email valide.</div>
+   
+ {{ form_row(form.motdepasse, {'attr': {'class': 'form-control', 'oninput': 'validatePassword()'}}) }}
+    <div id="password-error-message" style="display: none; color: red;"></div>    
+
+
+
+{{ form_row(form.role, {'attr': {'class': 'form-control', 'onclick': 'hideRoleError()'}}) }}
+    <div id="role-error-message" style="display: none; color: red;">Veuillez sélectionner un rôle.</div>   
+
+
+    {{ form_row(form.numtel, {'attr': {'class': 'form-control', 'maxlength': 8, 'oninput': 'limitPhoneNumberLength(event)'}}) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+<script>
+function validatePassword() {
+    var passwordField = document.getElementById('user_motdepasse');
+    var password = passwordField.value;
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    var errorField = document.getElementById('password-error-message');
+
+    if (!regex.test(password)) {
+        errorField.style.display = 'block';
+        errorField.innerHTML = 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.';
+    } else {
+        errorField.style.display = 'none';
+        errorField.innerHTML = '';
+    }
+}
+</script>
+<script>
+function validateEmail() {
+    var emailField = document.getElementById('user_email');
+    var email = emailField.value;
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var errorField = document.getElementById('email-error-message');
+
+    if (!regex.test(email)) {
+        errorField.style.display = 'block';
+    } else {
+        errorField.style.display = 'none';
+    }
+}
+</script>
+<script>
+function checkRole() {
+    var roleField = document.getElementById('user_role');
+    var role = roleField.value;
+    var errorField = document.getElementById('role-error-message');
+    var saveButton = document.getElementById('save-button');
+
+    if (!role) {
+        errorField.style.display = 'block';
+        saveButton.disabled = true;
+    } else {
+        errorField.style.display = 'none';
+        saveButton.disabled = false;
+    }
+}
+</script>
+<script>
+function hideRoleError() {
+    var errorField = document.getElementById('role-error-message');
+    var saveButton = document.getElementById('save-button');
+
+    errorField.style.display = 'none';
+    saveButton.disabled = false;
+}
+</script>
+<script>
+function limitPhoneNumberLength(event) {
+    var numtelField = event.target;
+    if (numtelField.value.length > 8) {
+        numtelField.value = numtelField.value.slice(0, 8);
+    }
+}
+</script>

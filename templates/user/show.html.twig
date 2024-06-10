@@ -1,0 +1,59 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Liste des utilisateurs {% endblock %}</title>
+<div class="content-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Détails de l'utilisateur</h2>
+
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="text-muted">Iduser</th>
+                                    <td>{{ user.iduser }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-muted">Email</th>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-muted">Mot de passe</th>
+                                    <td>{{ user.motdepasse }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-muted">Role</th>
+                                    <td>{{ user.role }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-muted">Numéro de téléphone</th>
+                                    <td>{{ user.numtel }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-muted">Image de profil</th>
+                                     <td>
+                                {% if user.image %}
+                                    <img src="{{ asset('uploads/' ~ user.image) }}" alt="Classe image" width="100" />
+                                {% else %}
+                                    No image available
+                                {% endif %}
+                            </td>
+                                  
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                        <a href="{{ path('app_user_index') }}" class="btn btn-primary">Retour à la liste</a>
+                        <a href="{{ path('app_user_edit', {'iduser': user.iduser}) }}" class="btn btn-secondary">Modifier</a>
+                        {{ include('user/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

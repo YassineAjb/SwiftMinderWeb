@@ -1,0 +1,71 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %} Liste des utilisateurs {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center">Statistiques des réclamations</h1>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    $(document).ready(function(){
+       
+        function createStat(x1,x2){
+            const data = {
+                labels: ['Réclamations traitées', 'Réclamations non traitées'],
+                datasets: [{
+                    label: 'Réclamations ',
+                    data: [x1, x2],
+                    backgroundColor: ['#007bff', '#dc3545'], // Couleurs Bootstrap (bleu et rouge)
+                    hoverOffset: 4
+                }]
+            };
+            const ctx = document.getElementById('myChart');
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom', // 
+                        },
+                    },
+                },
+            };
+            new Chart(ctx, config);
+        }
+
+        function fetchStatistic() {
+            $.ajax({
+                url: '{{ path('static_data') }}', 
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                  
+                    createStat(data.traite, data.non_traite);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching statistic:', error);
+                }
+            });
+        }
+
+        
+        fetchStatistic();
+    });
+</script>
+{% endblock %}

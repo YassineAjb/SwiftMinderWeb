@@ -1,0 +1,119 @@
+{# 
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Evenement</title>
+</head>
+<body>
+    <h1>Edit Evenement</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form_start(form) }}
+        <div>
+                    {{ form_label(form.nome, 'Nom') }}
+
+            {{ form_row(form.nome, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom'}}) }}
+        </div>
+        <div>
+                    {{ form_label(form.datee, 'Date') }}
+
+            {{ form_row(form.datee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Date'}}) }}
+        </div>
+        <div>
+                    {{ form_label(form.postee, 'Poste') }}
+        
+            {{ form_row(form.postee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Poste'}}) }}
+        </div>
+        <div>
+                    {{ form_label(form.periodep, 'Periode') }}
+
+            {{ form_row(form.periodep, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Periode'}}) }}
+        </div>
+        <div>
+                            {{ form_label(form.imgepath, 'Image') }}
+
+            {{ form_row(form.imgepath, {'attr': {'class': 'form-control-file'}}) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-danger" href="{{ path('app_evenement_index') }}">Back to list</a>
+        {{ form_end(form) }}
+    </form>
+
+</body>
+</html>
+
+{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Evenement</title>
+</head>
+<body>
+    <h1>Edit Evenement</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form_start(form) }}
+        <div>
+            {{ form_label(form.nome, 'Nom') }}
+            {{ form_widget(form.nome, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom'}}) }}
+        </div>
+        <div>
+            {{ form_label(form.datee, 'Date') }}
+            {{ form_widget(form.datee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Date'}}) }}
+        </div>
+        <div>
+            {{ form_label(form.postee, 'Poste') }}
+            {{ form_widget(form.postee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Poste'}}) }}
+        </div>
+        <div>
+            {{ form_label(form.periodep, 'Periode') }}
+            {{ form_widget(form.periodep, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Periode'}}) }}
+        </div>
+     <br>
+                                <div class="basic-form custom_file_input">
+
+<div class="input-group mb-3">
+    <button type="button" class="btn btn-info" id="addImageButton">
+        <span class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i></span>
+        Add
+    </button>
+
+    <div class="form-file" style="display: none;">
+        {{ form_widget(form.imgepath, {'attr': {'class': 'form-control-file'}}) }}
+    </div>
+                <input type="text" class="form-control" placeholder="Enter election image here " id="textInput" readonly>
+
+</div>
+
+<script>
+    document.getElementById('addImageButton').addEventListener('click', function() {
+        document.querySelector('.form-file input[type="file"]').click();
+    });
+</script>
+
+
+
+     <br><br>
+         <button type="submit" class="btn btn-primary">Update</button>
+             <a class="btn btn-danger" href="{{ path('app_evenement_index') }}">Back to list</a>
+
+    
+        {{ form_end(form) }}
+    </form>
+
+</body>
+</html>
+
+{% endblock %}

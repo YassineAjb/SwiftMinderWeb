@@ -1,0 +1,41 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %}Edit Rencontre{% endblock %}</title>
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Rencontre</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="basic-form">
+                                {{ form_start(f, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="mb-3">
+                                    {{ form_row(f.adversaire, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_row(f.score, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_row(f.daterencontre, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-9">
+                                        <a href="{{ path('app_rencontre_index') }}" class="btn btn-secondary">Back to List</a>
+                                    </div>
+                                    <div class="mb-3 col-md-3">
+                                        {{ form_row(f.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                    </div>
+                                </div>
+                                {{ form_end(f) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

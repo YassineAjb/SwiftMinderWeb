@@ -1,0 +1,41 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_errors(form) }}
+      {{ form_row(form.email, {'attr': {'class': 'form-control', 'oninput': 'validateEmail()'}}) }}
+    <div id="email-error-message" style="display: none; color: red;">Veuillez saisir une adresse email valide.</div>
+   
+  {{ form_row(form.motdepasse, {'attr': {'class': 'form-control', 'oninput': 'validatePassword()'}}) }}
+    <div id="password-error-message" style="display: none; color: red;"></div>    
+
+    {{ form_row(form.numtel) }}
+    <button class="btn btn-primary mt-5">{{ button_label|default('Inscription') }}</button>
+{{ form_end(form) }}
+<script>
+function validatePassword() {
+    var passwordField = document.getElementById('user_motdepasse');
+    var password = passwordField.value;
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    var errorField = document.getElementById('password-error-message');
+
+    if (!regex.test(password)) {
+        errorField.style.display = 'block';
+        errorField.innerHTML = 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.';
+    } else {
+        errorField.style.display = 'none';
+        errorField.innerHTML = '';
+    }
+}
+</script>
+<script>
+function validateEmail() {
+    var emailField = document.getElementById('user_email');
+    var email = emailField.value;
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var errorField = document.getElementById('email-error-message');
+
+    if (!regex.test(email)) {
+        errorField.style.display = 'block';
+    } else {
+        errorField.style.display = 'none';
+    }
+}
+</script>

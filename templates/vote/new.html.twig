@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Confirmation Vote</h1>
+
+    {{ include('vote/_form.html.twig') }}
+
+    <a href="{{ path('app_vote_index', {'idc': idc  , 'id_event': id_event}) }}" class="btn btn-secondary">Back to list</a>
+{% endblock %}

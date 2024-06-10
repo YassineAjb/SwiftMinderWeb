@@ -1,0 +1,64 @@
+{% extends '/front/base.html.twig' %}
+
+{% block title %}
+    Profil Utilisateur
+{% endblock %}
+
+{% block body %}
+    <section class="section section-profile parallax-container my-5">
+        <div class="parallax-content">
+            <div class="container">
+                <div class="row justify-content-center my-5">
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="card-title">Liste des Réclamations</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Idreclamation</th>
+                                                <th scope="col">Titre</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Etat</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for reclamation in reclamations %}
+                                            <tr>
+                                                <td>{{ reclamation.idreclamation }}</td>
+                                                <td>{{ reclamation.titre }}</td>
+                                                <td>{{ reclamation.description }}</td>
+                                                <td>
+                                                    {% if reclamation.etat == false %}
+                                                    <span class="badge badge-warning">En traitement</span>
+                                                    {% else %}
+                                                    <span class="badge badge-success">Traité</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ path('app_reclamation_show_client', {'idreclamation': reclamation.idreclamation}) }}" class="btn btn-primary btn-sm">Voir</a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            <tr>
+                                                <td colspan="5">Aucun enregistrement trouvé</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3">
+                                    <a href="{{ path('app_reclamation_new') }}" class="btn btn-success">Ajouter une réclamation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

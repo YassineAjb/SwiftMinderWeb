@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-xl-6 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create new Evenement</h4>
+            </div>
+            <div class="card-body">
+                <div class="basic-form">
+                   <form method="post" enctype="multipart/form-data">
+    {{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_row(form.nome, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom Election'}}) }}
+        {% if form_errors(form.nome) %}
+            <div class="text-danger">{{ form_errors(form.nome) }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.datee, {'attr': {'class': 'form-control', 'placeholder': 'Default input'}}) }}
+        {% if form_errors(form.datee) %}
+            <div class="text-danger">{{ form_errors(form.datee) }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.postee, {'attr': {'class': 'form-control form-control-sm', 'placeholder': 'Poste'}}) }}
+        {% if form_errors(form.postee) %}
+            <div class="text-danger">{{ form_errors(form.postee) }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.periodep, {'attr': {'class': 'form-control', 'placeholder': 'Mandat'}}) }}
+        {% if form_errors(form.periodep) %}
+            <div class="text-danger">{{ form_errors(form.periodep) }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.imgepath, {'attr': {'class': 'form-control-file'}}) }}
+        {% if form_errors(form.imgepath) %}
+            <div class="text-danger">{{ form_errors(form.imgepath) }}</div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-danger" href="{{ path('app_evenement_index') }}">Back</a>
+
+    {{ form_end(form) }}
+</form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

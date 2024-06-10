@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List PDF</title>
+    <style>
+        /* Add your CSS styles here */
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Card Styles */
+        .card {
+            width: 80%;
+            margin: 50px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-collapse: collapse;
+            table-layout: fixed; /* Prevent table from exceeding the PDF border */
+        }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            color: #ff0000; /* Red color */
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f3f4f7;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff0000; /* Red color */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Liste des evenements electorales</h5>
+        <hr>
+        <table class="table table-striped">
+            <tbody>
+            {% for event in evenements %}
+                <tr>
+                    <th>Nom d'election</th>
+                    <td>{{ event.nome }}</td>
+                </tr>
+                {# <tr>
+                    <th>Image</th>
+                     <td><img src="4fc82c0f0394767de08999836d138efe.png" /></td> 
+                </tr> #}
+                <tr>
+                    <th>Poste</th>
+                    <td>{{ event.postee }}</td>
+                </tr>
+                <tr>
+                    <th>Mandat</th>
+                    <td>{{ event.periodep }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'election</th>
+                    <td>{{ event.datee|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

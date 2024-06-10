@@ -1,0 +1,57 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+  <div class="content-body">
+			<div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active"><a href="javascript:void(0)">Form</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Element</a></li>
+            </ol>
+        </div>
+							<!--***************************start**********************
+              *******************************************************-->
+              <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 20px; padding: 10px;">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Horizontal Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    {{ form_start(f)}}
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.joueur,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.date_debut,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{form_row(f.salaire,{'attr':{'class':'form-control'}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.date_fin,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="mb-3 col-md-9">
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                            {{ form_row(f.submit) }}
+                                            </div>
+                                        </div>
+
+                                    {{form_end(f)}}
+                                </div>
+                            </div>
+                        </div>
+					</div>
+                </div>
+              <!--******************************************************
+              *******************************end*********************-->
+      </div>
+    </div>
+{% endblock %}

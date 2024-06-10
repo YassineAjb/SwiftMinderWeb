@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Vote index</h1>
+    <a class="btn btn-danger"  href="{{ path('app_evenement_index') }}">Back</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Candidat</th>
+                 <th>Evenement</th>
+
+                </tr>
+        </thead>
+        <tbody>
+        {% for vote in votes %}
+            <tr>
+                <td>{{ vote.Candidat.nomc }}</td>
+                <td>{{ vote.evenement.nome }}</td>
+
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

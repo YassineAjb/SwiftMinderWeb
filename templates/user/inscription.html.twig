@@ -1,0 +1,95 @@
+{% extends '/front/base.html.twig' %}
+
+
+{% block body %}
+	<title>
+		{% block title %}
+	Inscription
+		{% endblock %}
+	</title>
+	<!-- Section Breadcrumbs-->
+	<section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+		<div class="parallax-content breadcrumbs-custom context-dark">
+			<div class="container">
+				<h3 class="breadcrumbs-custom-title">Login and Register</h3>
+				<ul class="breadcrumbs-custom-path">
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+					<li>
+						<a href="#">Features</a>
+					</li>
+					<li class="active">Login and Register</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+           <section class="section section-variant-1 bg-gray-100">
+		<div class="container">
+			<div class="row row-50 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-6">
+					<div class="card-login-register" id="card-l-r">
+						<div class="card-top-panel">
+							<div class="card-top-panel-left">
+								<h5 class="card-title" id="login-title">Inscription</h5>
+							</div>
+							<div class="card-top-panel-right">
+								<span class="card-subtitle">
+								</span>
+								<button class="card-toggle active" onclick="switchForm()" id="switchbutton">
+									<span class="card-toggle-circle"></span>
+								</button>
+							</div>
+						</div>
+						<div class="card-form" id="login">
+						             
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    
+    {{ form_errors(form) }}
+    	<div class="form-wrap">
+    {{ form_row(form.email) }}
+    </div>
+   	<div class="form-wrap">
+    {{ form_row(form.motdepasse) }}
+    </div>
+       	<div class="form-wrap">
+    {{ form_row(form.numtel) }}
+    </div>
+
+    <button class="btn btn-primary mt-5">{{ button_label|default("S'inscrire") }}</button>
+{{ form_end(form) }}
+
+{% if error is defined %}
+<div class="alert alert-danger my-2">
+{{error}}
+</div>  
+{% endif %}
+
+         
+          							<div class="group-sm group-sm-justify group-middle">
+								<a class="button button-google button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-google-plus"></span>
+									<span>Google+</span>
+								</a>
+								<a class="button button-twitter button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-twitter"></span>
+									<span>Twitter</span>
+								</a>
+								<a class="button button-facebook button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-facebook"></span>
+									<span>Facebook</span>
+								</a>
+							</div>
+						</div>
+			</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    <script>
+    function switchForm(){
+window.location.href = "/user/login"; 
+    }
+    </script>
+
+{% endblock %}

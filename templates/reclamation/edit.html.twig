@@ -1,0 +1,25 @@
+
+{% extends '/front/base.html.twig' %}
+
+{% block title %}
+    Profil Utilisateur
+{% endblock %}
+
+{% block body %}
+    <section class="section section-profile parallax-container my-5" >
+        <div class="parallax-content">
+            <div class="container">
+                <div class="row justify-content-center my-5">
+                    <div class="col-lg-8">
+    <h1>Reclamation</h1>
+
+    {{ include('reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reclamation_index') }}">back to list</a>
+
+    {{ include('reclamation/_delete_form.html.twig') }}
+    </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}

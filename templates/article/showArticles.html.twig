@@ -1,0 +1,152 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Liste Des Articles {% endblock %}</title>
+  <div class="content-body">
+			<div class="container-fluid">
+
+        <div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Datatable</a></li>
+					</ol>
+                </div>
+			        <!--***************************start**********************
+              *******************************************************-->
+            <div class="row">
+              <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Liste Articles</h4>
+                                <div class="mb-4">
+                                <a href="{{ path('app_article_new') }}" class="btn btn-outline-success btn-rounded fs-16">+ Nouveau Article</a>
+
+
+
+                            </div>
+                        </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                      <table id="example3" class="display" style="min-width: 845px">
+                                         <thead>
+    <tr>
+        
+        <!-- <th>Id</th> -->
+        <!-- <th>Journaliste Id</th> -->
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    {% for Article in pagination %}
+        <tr>
+           <!-- <td><img class="rounded-circle" width="35" src="{{ asset('assets_admin/images/profile/small/pic1.jpg') }}" alt=""></td>-->
+            <!-- <td>{{ Article.getIdarticle() }}</td> -->
+            <!-- <td>{{ Article.getidjournaliste().getIduser() }}</td> -->
+            <td>{{ Article.getTitre() }}</td>
+            <td>{{ Article.getDescription() }}</td>
+             <td> <img width="80" height="50" src="http://localhost/Images/Articles/{{ Article.getImage() }}" alt=""></td>
+            <td>
+                <div class="d-flex">
+                    <a href="{{ path('app_article_edit', {'idarticle': Article.getIdarticle()}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="{{ path('app_article_delete', {'idarticle': Article.getIdarticle()}) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+
+                                      </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!--******************************************************
+              *******************************end*********************-->
+      </div>
+    </div>
+<style>
+/* Styles for the pagination */
+.pagination .next.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #f8f9fa; /* Change background color for disabled state */
+    color: #333; /* Change text color for disabled state */
+    border-color: #ccc; /* Change border color for disabled state */
+}
+
+.pagination .disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: #f8f9fa; /* Change background color for disabled state */
+    color: #333; /* Change text color for disabled state */
+    border-color: #ccc; /* Change border color for disabled state */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: 0 2px; /* Adjust margin as needed */
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Styles for the navigation arrows */
+.pagination .prev,
+.pagination .next {
+    display: flex;
+    align-items: center;
+}
+
+.pagination .prev a,
+.pagination .next a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: 0 2px; /* Adjust margin as needed */
+}
+
+.pagination .prev a:hover,
+.pagination .next a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+</style>
+    <div class="container py-5">
+  <div class="d-flex justify-content-center">
+{{ knp_pagination_render(pagination) }}
+
+</div>
+</div>
+{% endblock %}

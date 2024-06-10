@@ -1,0 +1,70 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+       <!-- Section Breadcrumbs-->
+      <section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+        <div class="parallax-content breadcrumbs-custom context-dark">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">Roster</h3>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Team</a></li>
+              <li class="active">Roster</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section section-sm bg-gray-100">  
+        <div class="container">
+          <!-- Heading Component-->
+          <article class="heading-component">
+            <div class="heading-component-inner">
+              <h5 class="heading-component-title">Team Roster
+              </h5>
+            </div>
+          </article>
+          <div class="row row-30">
+          {% for Joueur in list %}   
+              <div class="col-sm-6 col-lg-4"> 
+                <!-- Player Info Modern-->
+                <div class="player-info-modern"><a class="player-info-modern-figure" href="/pageJoueur/{{Joueur.getId()}}"><img src="http://localhost/Images/Joueurs/{{ Joueur.getImagepath() }}" alt="" width="368" height="286"></a>
+                  <div class="player-info-modern-footer">
+                    <div class="player-info-modern-number">
+                      <p>{{Joueur.getShirtnum()}}</p>
+                    </div>
+                    <div class="player-info-modern-content">
+                      <div class="player-info-modern-title">
+                        <h5><a href="player-page.html">{{Joueur.getNom() ~ " " ~ Joueur.getPrenom()}}</a></h5>
+                        <p>{{Joueur.getPosition()}}</p>
+                      </div>
+                      <div class="player-info-modern-progress">
+                        <!-- Linear progress bar-->
+                        <article class="progress-linear progress-bar-modern">
+                          <div class="progress-header">
+                            <p>PASS ACC</p>
+                          </div>
+                          <div class="progress-bar-linear-wrap">
+                            <div class="progress-bar-linear"></div>
+                          </div><span class="progress-value">{{ random(40, 90) }}</span>
+                        </article>
+                        <!-- Linear progress bar-->
+                        <article class="progress-linear progress-bar-modern">
+                          <div class="progress-header">
+                            <p>SHOTS ACC</p>
+                          </div>
+                          <div class="progress-bar-linear-wrap">
+                            <div class="progress-bar-linear"></div>
+                          </div><span class="progress-value">{{ random(60, 100) }}</span>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              {% endfor %}    
+            </div>
+          </div>
+      </section>
+
+{% endblock %}

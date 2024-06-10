@@ -1,0 +1,52 @@
+    {% extends 'evenement/indexCalendar.html.twig' %}
+
+
+{% block title %}CALENDRIER{% endblock %}
+
+  	  {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets_front/css/css?family=Kanit:300,400,500,500i,600,900%7CRoboto:400,900') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/fonts.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/style.css') }}" id="main-styles-link">
+      {% endblock %}
+
+
+
+{% block body %}
+<br>
+<br>
+<br>
+<a href="{{ path('app_evenement_index') }}" class="btn btn-primary" style="margin-left: 4px; margin-bottom: 5px;">
+    Go Back
+</a>
+
+
+    <div id="calendrier">
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+    
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                editable: true,
+                eventResizableFromStart: true,
+                events: {{ rdvsJson | raw }}
+            })
+    
+            calendar.render()
+        }
+    </script>
+    
+    {% endblock %}

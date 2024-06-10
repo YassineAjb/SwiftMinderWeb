@@ -1,0 +1,163 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+  <div class="content-body">
+	<div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active"><a href="javascript:void(0)">Joueurs</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Modifier</a></li>
+            </ol>
+        </div>
+							<!--***************************start**********************
+              *******************************************************-->
+              <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 20px; padding: 10px;">
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Modifier joueur</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    {{ form_start(f)}}
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.nom,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.prenom,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                {{ form_row(f.age,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                              {{form_row(f.position,{'attr':{'class':'default-select form-control wide'}})}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-6">
+                                                 {{ form_row(f.hauteur,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                 {{ form_row(f.poids,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="input-group mb-3">
+											                        <span class="input-group-text">Upload</span>
+                                                <div class="form-file">
+                                                    {{ form_row(f.imagepath,{'attr':{'class':"form-file-input form-control"}})}}                                                
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-9">
+                                                {{ form_row(f.link,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                {{ form_row(f.shirtnum,{'attr':{'class':"form-control"}})}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-md-9">
+                                              <div class="row">
+                                                <label class="col-form-label col-sm-3 pt-0">Pied fort</label>
+                                                  <div class="col-sm-9">
+                                                   {% for choice in f.piedfort %}
+                                                        <div class="form-check">         
+                                                            {{ form_row(choice, {'label_attr': {'class': 'form-check-label'}, 'attr': {'class': 'form-check-input'}}) }}
+                                                        </div>
+                                                    {% endfor %}
+                                                  </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="mb-3 col-md-9">
+                                          </div>
+                                          <div class="mb-3 col-md-3">
+                                                          {{ form_row(f.submit) }}
+                                          </div>
+                                        </div>
+
+                                    {{form_end(f)}}
+                                </div>
+                            </div>
+                        </div>
+					</div>
+                </div>
+              <!--******************************************************
+              *******************************end*********************-->
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the form and submit button
+            var form = document.querySelector('form');
+            var submitButton = document.querySelector('[type="submit"]');
+            var linkInput = document.getElementById('{{ f.link.vars.id }}');
+            var imagePathInput = document.getElementById('{{ f.imagepath.vars.id }}');
+            
+            // Add event listener to form submission
+            form.addEventListener('submit', function(event) {
+                // Check each input field for emptiness
+                var nomInput = document.getElementById('{{ f.nom.vars.id }}');
+                var prenomInput = document.getElementById('{{ f.prenom.vars.id }}');
+                var ageInput = document.getElementById('{{ f.age.vars.id }}');
+                var positionInput = document.getElementById('{{ f.position.vars.id }}');
+                var hauteurInput = document.getElementById('{{ f.hauteur.vars.id }}');
+                var poidsInput = document.getElementById('{{ f.poids.vars.id }}');
+                var imagePathInput = document.getElementById('{{ f.imagepath.vars.id }}');
+                var linkInput = document.getElementById('{{ f.link.vars.id }}');
+                var piedfortInputs = document.querySelectorAll('[name="{{ f.piedfort.vars.full_name }}"]');
+                
+                var isPiedfortEmpty = true;
+                piedfortInputs.forEach(function(input) {
+                    if (input.checked) {
+                        isPiedfortEmpty = false;
+                    }
+                });
+
+                if (isEmpty(nomInput) || isEmpty(prenomInput) || isEmpty(ageInput) || isEmpty(positionInput) ||
+                    isEmpty(hauteurInput) || isEmpty(poidsInput) || isEmpty(imagePathInput) || isEmpty(linkInput) ||
+                    isPiedfortEmpty) {
+                    // If any field is empty, prevent form submission
+                    event.preventDefault();
+                    alert('Please fill in all fields.');
+                }
+
+                // Check if linkInput follows a link protocol
+                if (!isValidLink(linkInput.value)) {
+                    event.preventDefault();
+                    alert('Please enter a valid link starting with http:// or https://');
+                }
+
+                // Check if imagePathInput ends with image file extensions
+                if (!isValidImagePath(imagePathInput.value)) {
+                    event.preventDefault();
+                    alert('Please enter a valid image path ending with .jpeg, .jpg, or .png');
+                }
+            });
+            
+            // Function to check if a field is empty
+            function isEmpty(inputField) {
+                return inputField.value.trim() === '';
+            }
+            
+            // Function to check if the link follows a link protocol
+            function isValidLink(link) {
+                return /^https?:\/\//.test(link);
+            }
+
+            // Function to check if the imagePathInput ends with image file extensions
+            function isValidImagePath(imagePath) {
+                return /\.(jpeg|jpg|png)$/i.test(imagePath);
+            }
+        });
+    </script>
+{% endblock %}
+
+
+
+

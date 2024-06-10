@@ -1,0 +1,108 @@
+{% extends '/front/base.html.twig' %}
+{% block body %}
+
+<section class="section section-md bg-gray-100">
+  <div class="container">
+    <div class="row row-50">
+
+      <div class="col-sm-12">
+        <!-- Heading Component-->
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">Liste des évenement d'aujourd'hui</h5>
+            
+          </div>
+        </article>
+        <div class="row row-30">
+          <li class="nav-item d-flex align-items-center">
+            <div class="input-group search-area">
+              <input type="text" class="form-control" id="searchInput" placeholder="Rechercher ...">
+ <button class="btn" type="button" style="background-color: transparent; border: none;" onclick="startSpeechRecognition()">
+        <i class="bi bi-mic" style="color: black;"></i> <!-- Bootstrap Icons microphone icon -->
+       </button>
+              <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
+            </div>
+          </li>
+          <script>
+            function filterTable() {
+              const filter = document.getElementById('searchInput').value.toUpperCase();
+              const events = document.querySelectorAll('.product');
+              for (let i = 0; i < events.length; i++) {
+                const event = events[i];
+                const eventName = event.querySelector('.product-title').innerText.toUpperCase();
+                const eventDate = event.querySelector('p:nth-child(2)').innerText.toUpperCase();
+                if (eventName.indexOf(filter) > -1 || eventDate.indexOf(filter) > -1) {
+                  event.style.display = '';
+                } else {
+                  event.style.display = 'none';
+                }
+              }
+            }
+            document.getElementById('searchInput').addEventListener('keyup', filterTable);
+
+
+             function startSpeechRecognition() {
+        // Démarrer la reconnaissance vocale
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'fr-FR'; // Définir la langue de la reconnaissance vocale (facultatif)
+        recognition.start();
+
+        // Écouter les résultats de la reconnaissance vocale
+        recognition.onresult = function(event) {
+            const recognizedText = event.results[0][0].transcript.trim(); // Récupérer le texte reconnu
+            const cleanedText = recognizedText.endsWith('.') ? recognizedText.slice(0, -1) : recognizedText; // Supprimer le dernier caractère s'il s'agit d'un point
+            document.getElementById('searchInput').value = cleanedText; // Afficher le résultat dans le champ de recherche
+
+            // Appel de la fonction de recherche lorsque du texte est reconnu
+            filterTable(cleanedText); 
+        };
+
+        // Gérer les erreurs éventuelles de la reconnaissance vocale
+        recognition.onerror = function(event) {
+            console.error('Erreur de reconnaissance vocale:', event.error);
+        };
+    }
+          </script>
+          {% if evenements is not empty %}
+          {% for evenement in evenements %}
+          <div class="col-md-6 col-lg-4">
+            <!-- Product - Grid build-->
+            <article class="product">
+              <header class="product-header">
+                <div class="product-figure">
+                  <img src="{{ asset('uploads/' ~ evenement.imgepath) }}" alt="Product Image">
+                </div>
+                <div class="product-buttons">
+<a class="product-button" href="{{ path('app_candidat_index_front', {'id_event': evenement.ide}) }}">
+    <i class="fas fa-user" style="font-size: 26px;"></i>
+</a>
+                  <a class="product-button fl-bigmug-line-zoom60" href="{{ asset('uploads/' ~ evenement.imgepath) }}" data-lightgallery="item" style="font-size: 25px"></a>
+                </div>
+              </header>
+              <footer class="product-content">
+                <h6 class="product-title"><a href="#">{{ evenement.nome }}</a></h6>
+                <p>{{ evenement.datee|date('Y-m-d') }}</p>
+                <p>{{ evenement.postee }}</p>
+                <p>{{ evenement.periodep }}</p>
+              </footer>
+            </article>
+          </div>
+          {% endfor %}
+          {% else %}
+          <div class="col-sm-12">
+            <br><br>
+            <p>Aucun événement prévu pour aujourd'hui.</p>
+          </div>
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="col-sm-12">
+        <!-- Heading Component-->
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

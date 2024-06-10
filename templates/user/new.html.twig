@@ -1,0 +1,26 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %} Ajouter un utilisateur {% endblock %}
+
+{% block body %}
+<div class="content-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4 text-center">Ajouter un utilisateur <i class="fas fa-user-plus"></i></h2>
+
+                        {{ include('user/_form.html.twig') }}
+
+                        
+
+                        <a href="{{ path('app_user_index') }}" class="btn btn-primary mt-3 d-block mx-auto">Retour à la liste</a>
+         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

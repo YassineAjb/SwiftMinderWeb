@@ -1,0 +1,173 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+ 
+        <section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+        <div class="parallax-content breadcrumbs-custom context-dark">
+          <div class="container">
+            <h3 class="breadcrumbs-custom-title">List Shop</h3>
+            <ul class="breadcrumbs-custom-path">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Shop</a></li>
+              <li class="active">List Shop</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- List Shop-->
+      <section class="section section-md bg-gray-100">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-xl-9">
+              <!-- Heading Component-->
+              <article class="heading-component">
+                <div class="heading-component-inner">
+                  <h5 class="heading-component-title">Product catalog
+                  </h5>
+                  <div class="heading-component-aside">
+                    <ul class="list-inline list-inline-xs list-inline-middle">
+                      <li>
+                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-md">
+                          <option label="placeholder"></option>
+                          <option value="newest first" selected="">newest first</option>
+                          <option value="oldest first">oldest first</option>
+                        </select>
+                      </li>
+                      <li>
+                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-md">
+                          <option label="placeholder"></option>
+                          <option value="product price" selected="">product price</option>
+                          <option value="low to high">low to high</option>
+                          <option value="high to low">high to low</option>
+                        </select>
+                      </li>
+                      <li>
+                        <select class="select" data-placeholder="Select an option" data-container-class="select-minimal-lg">
+                          <option label="placeholder"></option>
+                          <option value="show 6 per page" selected="">show 6 per page</option>
+                          <option value="show 12 per page">show 12 per page</option>
+                          <option value="show 24 per page">show 24 per page</option>
+                        </select>
+                      </li>
+                      <li><a class="icon icon-xs-big icon-gray-500 fa-th" href="boutique"></a></li>
+                      <li><a class="icon icon-xs-big icon-gray-500 fa-list-ul active" href="list-shop.html"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+                              {% for produit in produits %}
+                              {% if produit.getQauntiteProduit > 0 %}
+              <article class="product-list">
+                <div class="product-list-aside">
+    <img src="http://localhost/Images/Produits/{{ produit.getImage() }}" alt="" style="width: 150px; height: 200px; object-fit: cover;">
+                  <!-- Badge-->
+                  <div class="badge badge-red">hot<span class="icon material-icons-whatshot"></span>
+                  </div>
+                </div>
+                <section class="product-list-main">
+                  <h4 class="product-list-title"><a href="product-page.html">{{produit.nomProduit}}</a></h4>
+                  <ul class="product-list-info">
+                    <li>
+                      <ul class="product-list-rating">
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star_half"></span></li>
+                      </ul>
+                    </li>
+                    <li>4 customer reviews</li>
+                  </ul>
+                  <ul class="product-list-price">
+                    <li><span class="product-list-price-new heading-4">${{produit.prixProduit}}</span></li>
+                  </ul>
+                  <div class="product-list-text">
+                    <p>{{produit.getCategory.getTitre}}</p>
+                  </div>
+                  <ul class="product-list-buttons">
+                    <li><a class="button button-primary"  href="{{ path('ajoutcommande',{'id':produit.idproduit}) }}"><span>Add to cart</span></a></li>
+                    <li>
+                      <div class="product-list-share focus-toggle-parent"><span class="product-list-share-btn focus-toggle fl-bigmug-line-share27"></span>
+                        <ul>
+                          <li><span>Share</span></li>
+                          <li><a class="icon icon-xs fa fa-facebook" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-instagram" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-twitter" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-google-plus" href="#"></a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </section>
+              </article>
+              {% else %}
+              <article class="product-list">
+                <div class="product-list-aside">
+    <img src="http://localhost/Images/Produits/{{ produit.getImage() }}" alt="" style="width: 150px; height: 200px; object-fit: cover;">
+                  <!-- Badge-->
+                  <div class="badge badge-red">out of stock<span class="icon material-icons-whatshot"></span>
+                  </div>
+                </div>
+                <section class="product-list-main">
+                  <h4 class="product-list-title"><a href="product-page.html">{{produit.nomProduit}}</a></h4>
+                  <ul class="product-list-info">
+                    <li>
+                      <ul class="product-list-rating">
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star"></span></li>
+                        <li><span class="material-icons-star_half"></span></li>
+                      </ul>
+                    </li>
+                    <li>4 customer reviews</li>
+                  </ul>
+                  <ul class="product-list-price">
+                    <li><span class="product-list-price-new heading-4">${{produit.prixProduit}}</span></li>
+                  </ul>
+                  <div class="product-list-text">
+                    <p>{{produit.getCategory.getTitre}}</p>
+                  </div>
+                  <ul class="product-list-buttons">
+                    <li><a class="button button-primary" href="shopping-cart.html"><span>Add to cart</span></a></li>
+                    <li>
+                      <div class="product-list-share focus-toggle-parent"><span class="product-list-share-btn focus-toggle fl-bigmug-line-share27"></span>
+                        <ul>
+                          <li><span>Share</span></li>
+                          <li><a class="icon icon-xs fa fa-facebook" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-instagram" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-twitter" href="#"></a></li>
+                          <li><a class="icon icon-xs fa fa-google-plus" href="#"></a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </section>
+              </article>
+              {% endif %}
+              
+
+              {% endfor %}
+              <!-- Product - List build-->
+              
+              
+              <nav class="pagination-wrap" aria-label="Page navigation">
+                <ul class="pagination"> 
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><span class="page-link">...</span></li>
+                  <li class="page-item"><a class="page-link" href="#">14</a></li>
+                </ul>
+              </nav>
+            </div>
+                            
+            <div class="col-xl-3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+       
+{% endblock %}

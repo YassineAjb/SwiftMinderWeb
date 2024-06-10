@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.Titre }}</title>
+    <style>
+        /* Add your custom CSS styles for the PDF content here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .article-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .article-content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <article class="post-corporate">
+                        <div class="post-corporate-content">
+                            <div class="post-corporate-header">
+                                <div class="badge badge-primary">SWIFTMINDER</div>
+                                  <time class="post-corporate-time" datetime="{{ "now"|date('Y-m-d') }}">{{ "now"|date('F j, Y') }}</time>
+                               
+                            </div>
+                            
+                            <div style="text-align: center;">
+    <h4 class="post-corporate-title"><a href="blog-post.html">{{ article.getTitre }}</a></h4>
+</div>
+
+                            <div class="post-corporate-text">
+                                <p>{{ article.getDescription }}</p>
+                               
+                            </div>
+                        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des commandes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des commandes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom du produit</th>
+                    <th>Catégorie</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = 0 %}
+                {% for commande in commandes %}
+                <tr>
+                    <td>{{ commande.idProduit.getnomProduit }}</td>
+                    <td>{{ commande.idProduit.getCategory.getTitre }}</td>
+                    <td>{{ commande.getQuantite }}</td>
+                    <td>{{ commande.getQuantite * commande.getSomme }}</td>
+                    <td><img src="http://localhost/Images/Produits/{{ commande.IdProduit.getImage() }}" alt=""></td>
+                </tr>
+                {% set total = total + commande.getQuantite * commande.getSomme %}
+                {% endfor %}
+                <tr>
+                    <td colspan="3">Total TTC</td>
+                    <td>{{ total }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

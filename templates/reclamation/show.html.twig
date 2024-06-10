@@ -1,0 +1,48 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block title %} Détails de la réclamation {% endblock %}
+
+{% block body %}
+<div class="content-body">
+    <div class="container-fluid">
+        <h1 class="mt-4">Détails de la Réclamation</h1>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Idreclamation</th>
+                            <td>{{ reclamation.idreclamation }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Titre</th>
+                            <td>{{ reclamation.titre }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description</th>
+                            <td>{{ reclamation.description }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Etat</th>
+                            <td>
+                                <span class="badge {% if reclamation.etat == false %}bg-danger{% else %}bg-success{% endif %}">
+                                    {% if reclamation.etat == false %}Non Traité{% else %}Traité{% endif %}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {% if reclamation.etat == false %}
+        <div class="mt-4">
+            <h3>Traitement de la Réclamation :</h3>
+            {{ include("/reclamation/traiter.html.twig") }}
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

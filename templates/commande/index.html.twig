@@ -1,0 +1,127 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+<head>
+    <!-- Metas -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping Cart</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css" id="main-styles-link">
+</head>
+<body>
+    <div class="preloader">
+        <div class="preloader-body">
+            <div class="preloader-item"></div>
+        </div>
+    </div>
+    <!-- Page Content -->
+    <section class="section section-md bg-gray-100">
+        <div class="container">
+            <article class="heading-component">
+                <div class="heading-component-inner">
+                    <h5 class="heading-component-title">Your shopping cart</h5>
+                </div>
+            </article>
+            <div class="product-cart">
+                <div class="table-custom-responsive">
+                    <table class="table-custom table-product">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set total = 0 %}
+                            {% for commande in commande %}
+                                <tr>
+                                    <td> 
+                                        <div class="product-cart-name">
+                                            <a class="product-cart-media" href="product-page.html">
+                                                <img src="http://localhost/Images/Produits/{{ commande.idProduit.getImage() }}" alt="">
+                                            </a>
+                                            <p class="product-cart-title">
+                                                <a href="product-page.html">{{ commande.idProduit.getnomProduit() }}</a>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="stepper-modern">
+                                            <input class="form-input quantite" type="number" data-price="{{ commande.idProduit.getPrixProduit }}" name="quantite" data-zeros="true" value="0" min="1" max="100" data-commande-id="{{ commande.idCommande }}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="product-cart-price">
+                                            <span>{{ commande.idProduit.getPrixProduit }} DT</span>
+                                        </div>
+                                    </td>
+                                    <td class="total-commande">
+                                        <!-- Le total de cette commande sera calculé dynamiquement -->
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('supprimercommande', {'id': commande.idCommande}) }}" class="product-cart-delete">
+                                            <i class="icon fl-bigmug-line-recycling10"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="product-cart-footer">
+                    <div class="product-cart-total">
+                        <span>Total</span>
+                        <span class="product-cart-total-price total-general"><span class="sup"> $</span>{{ total }}</span>
+                    </div>
+                    <a class="button button-lg button-primary" href="paiement">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+</body>
+</html>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    $(document).ready(function() {
+        $('.quantite').change(function() {
+            var quantite = $(this).val();
+            var idCommande = $(this).data('commande-id');
+             var total = 0;
+            $('.quantite').each(function() {
+                var quantite = parseInt($(this).val());
+                var prix = parseFloat($(this).data('price'));
+                var subtotal = quantite * prix;
+                total += subtotal;
+                $(this).closest('tr').find('.total-commande').text(subtotal.toFixed(2) + ' DT');
+            });
+                $('.total-general').text(total.toFixed(2) + ' DT');
+
+            $.ajax({
+                url: '/update_quantity/' + idCommande,
+                method: 'POST',
+                data: { quantite: quantite },
+                success: function(response) {
+                    console.log(response); // Affichez le message de succès dans la console
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Affichez les erreurs dans la console
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <title>{% block title %}Welcome!{% endblock %}</title>	
+
+  	  {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets_front/css/css?family=Kanit:300,400,500,500i,600,900%7CRoboto:400,900') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/fonts.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets_front/css/style.css') }}" id="main-styles-link">
+      {% endblock %}
+      
+
+</head>
+<body>
+    
+    <div class="page">
+      {% include '/front/includes/header.html.twig' %}
+            {% block body %}
+            
+            {% endblock %}
+      {% include '/front/includes/footer.html.twig' %}
+    </div>
+    {% block javascripts %}
+    <script src="{{ asset('assets_front/js/core.min.js') }}"></script>
+    <script src="{{ asset('assets_front/js/script.js') }}"></script>
+  <!-- Google Tag Manager -->
+    <noscript>
+      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69" height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
+    <script>
+      (
+        function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),
+            dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+            }
+      )
+      (window,document,'script','dataLayer','GTM-P9FT69');
+    </script><!-- End Google Tag Manager -->
+      
+	  {% endblock %}
+</body>
+
+
+</html>

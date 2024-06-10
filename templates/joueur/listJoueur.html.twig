@@ -1,0 +1,83 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block body %}
+<title> {% block title %} Hello Controller! {% endblock %}</title>
+  <div class="content-body">
+			<div class="container-fluid">
+
+        <div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Datatable</a></li>
+					</ol>
+                </div>
+			        <!--***************************start**********************
+              *******************************************************-->
+            <div class="row">
+              <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Liste joueurs</h4>
+                                <div class="mb-4">
+                                <a href="/newJoueur" class="btn btn-outline-success btn-rounded fs-16">+ Nouveau joueur</a>
+
+                            </div>
+                        </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                      <table id="example3" class="display" style="min-width: 845px">
+                                          <thead>
+                                              <tr>
+                                                  <th></th>
+                                                  <th>Id</th>
+                                                  <th>Nom</th>
+                                                  <th>Prenom</th>
+                                                  <th>Age</th>
+                                                  <th>Position</th>
+                                                  <th>Numero de maillot</th>
+                                                  <th>Hauteur</th>
+                                                  <th>Poids</th>
+                                                  <th>Piedfort</th>
+                                                  <th>image_path</th>
+                                                  <th>QRCode</th>
+                                                  <th>link</th>
+                                                  <th>Action</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                            {% for Joueur in list %}
+                                              <tr>
+                                                  <td><img class="rounded-circle" width="60" src="http://localhost/Images/Joueurs/{{ Joueur.getImagepath() }}" alt=""></td>
+                                                  <td>{{ Joueur.getId() }}</td>
+                                                  <td>{{ Joueur.getNom() }}</td>
+                                                  <td>{{ Joueur.getPrenom() }}</td>
+                                                  <td>{{ Joueur.getAge() }}</td>
+                                                  <td>{{ Joueur.getPosition() }}</td>
+                                                  <td>{{ Joueur.getShirtnum() }}</td>
+                                                  <td>{{ Joueur.getHauteur() }}</td>
+                                                  <td>{{ Joueur.getPoids() }}</td>
+                                                  <td>{{ Joueur.getPiedfort() }}</td>
+                                                  <td>{{ Joueur.getImagepath() }}</td>
+                                                  <td> <img src="{{ Joueur.QRcode }}" width="123" height="100" /> </td>
+                                                  <td>{{ Joueur.getLink() }}</td>
+                                                  <td>
+                                                    <div class="d-flex">
+                                                      <a href="{{ path('Joueur_edit', {id: Joueur.getId}) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                      <a href="{{ path('Joueur_delete', {id: Joueur.getId}) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                    </div>												
+                                                  </td>
+                                              {% endfor %}
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <!--******************************************************
+              *******************************end*********************-->
+      </div>
+    </div>
+{% endblock %}

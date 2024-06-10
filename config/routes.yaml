@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+upload_image:
+    path: '/upload-image'
+    controller: 'App\Controller\VotreController::uploadImage'
+    methods: ['POST']

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>Rencontre</title>
+
+{% block body %}
+    <h1>Rencontre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idrencontre</th>
+                <td>{{ rencontre.idrencontre }}</td>
+            </tr>
+            <tr>
+                <th>Daterencontre</th>
+                <td>{{ rencontre.daterencontre ? rencontre.daterencontre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adversaire</th>
+                <td>{{ rencontre.adversaire }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ rencontre.score }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rencontre_index') }}">back to list</a>
+
+    <a href="{{ path('app_rencontre_edit', {'idrencontre': rencontre.idrencontre}) }}">edit</a>
+
+    {{ include('rencontre/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+	<title>
+		{% block title %}
+			Hello Controller!
+		{% endblock %}
+	</title>
+	<!-- Section Breadcrumbs-->
+	<section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
+		<div class="parallax-content breadcrumbs-custom context-dark">
+			<div class="container">
+				<h3 class="breadcrumbs-custom-title">Login and Register</h3>
+				<ul class="breadcrumbs-custom-path">
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+					<li>
+						<a href="#">Features</a>
+					</li>
+					<li class="active">Login and Register</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!-- Section Login/register-->
+	<section class="section section-variant-1 bg-gray-100">
+		<div class="container">
+			<div class="row row-50 justify-content-center">
+				<div class="col-md-10 col-lg-8 col-xl-6">
+					<div class="card-login-register" id="card-l-r">
+						<div class="card-top-panel">
+							<div class="card-top-panel-left">
+								<h5 class="card-title" id="login-title">Login</h5>
+								<h5 class="card-title" id="register-title" style="display:none">Register</h5>
+							</div>
+							<div class="card-top-panel-right">
+								<span class="card-subtitle">
+									<span class="card-subtitle-login">Register now</span>
+									<span class="card-subtitle-register">Sign in</span>
+								</span>
+								<button class="card-toggle" onclick="switchForm()" id="switchbutton">
+									<span class="card-toggle-circle"></span>
+								</button>
+							</div>
+						</div>
+						<div class="card-form" id="login">
+							{{ form_start(login, {'attr': {'novalidate': 'novalidate'}}) }}
+							<div class="form-wrap">
+								{{ form_row(login.email) }}
+							</div>
+							<div class="form-wrap">
+								{{ form_row(login.motdepasse) }}
+							</div>
+
+							<button class="btn btn-primary mt-5">{{ button_label|default('Se connecter') }}</button>
+							{{ form_end(login) }}
+							<div class="group-sm group-sm-justify group-middle">
+								<a class="button button-google button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-google-plus"></span>
+									<span>Google+</span>
+								</a>
+								<a class="button button-twitter button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-twitter"></span>
+									<span>Twitter</span>
+								</a>
+								<a class="button button-facebook button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-facebook"></span>
+									<span>Facebook</span>
+								</a>
+							</div>
+						</div>
+						<div class="card-form" id="register" style="display:none">
+							{{ form_start(registration, {'attr': {'novalidate': 'novalidate'}}) }}
+							<div class="form-wrap">
+								{{ form_row(registration.email) }}
+							</div>
+							<div class="form-wrap">
+								{{ form_row(registration.motdepasse) }}
+							</div>
+							<div class="form-wrap">
+								{{ form_row(registration.numtel) }}
+							</div>
+							<button class="btn btn-primary mt-5">{{ button_label|default('Inscription') }}</button>
+							{{ form_end(registration) }}
+
+							<div class="group-sm group-sm-justify group-middle">
+								<a class="button button-google button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-google-plus"></span>
+									<span>Google+</span>
+								</a>
+								<a class="button button-twitter button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-twitter"></span>
+									<span>Twitter</span>
+								</a>
+								<a class="button button-facebook button-icon button-icon-left button-round" href="#">
+									<span class="icon fa fa-facebook"></span>
+									<span>Facebook</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		let value = 1;
+
+
+function switchForm() {
+if (value == 1) {
+document.getElementById("switchbutton").classList.add("active");
+
+document.getElementById("login").style.display = "none";
+document.getElementById("login-title").style.display = "none"
+
+document.getElementById("register-title").style.display = "block";
+document.getElementById("register").style.display = "block";
+
+} else {
+document.getElementById("switchbutton").classList.remove("active");
+document.getElementById("register-title").style.display = "none";
+
+
+document.getElementById("login").style.display = "block";
+document.getElementById("login-title").style.display = "block";
+} value = value * -1;
+
+}
+
+
+	</script>
+
+
+{% endblock %}
